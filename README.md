@@ -1,66 +1,65 @@
+#Introduction:
+Marionette is a new topology poisoning technique that manipulates OpenFlow link discovery packet forwarding to alter topology information. Our technique introduces a globalized topology poisoning attack that leverages control privileges. Marionette implements a reinforcement learning algorithm to compute a poisoned topology target, and injects flow entries to achieve a long-lived stealthy attack. In this artifact, we use the open-source SDN controller ONOS and OpenDaylight to demonstrate our attack. There are two parts of this artifact. In Part 1, we have a simple topology to demonstrate the proof-of-concept functionality (i.e. precise link manipulation and misleading routing). In Part 2, we provide a complete attack starting with computing a deceptive topology with Reinforcement Learning and then implementing the poisonous flow entries to make the learned deceptive topology happen based on an enterprise fat tree topology. In details:
+
+Part 1: Marionette attacks ONOS cluster from a malicious ONOS to manipulate links on a 5-node topology with Mininet to demonstrate its capability of precise link manipulation while maintaining the same degree sequence. We will also demonstrate the difference of the routings by ONOS reactive forwarding before and after the attack. 
+
+Part 2: Marionette attacks OpenDaylight from a malicious application with the goal of attracting more flows to an eavesdropping point. Step 1: the Marionette collect nodes and topology information to learn a deceptive topology based on an enterprise fat tree topology to meet the attack goal. Step 2: the Marionette compose corresponding poisonous flow entries to mislead the OpenDaylight controller to learn a deceptive topology as we designed in Step 1.  
+
+Security Issue Explanation: This artifact should be safe to implement on a cloud environment even if the environment has real SDN controllers. That is because: (1) the virtual network (Mininet) and the controllers (ONOS and OpenDaylight) are either on a virtual machine or a docker. (2) We have specified the IP addresses of our testbed controllers in the scripts such that the Marionette will not connect with a real-world controller to attack any real-world network.
+
+
+#Part 1: Marionette on ONOS cluster
+##Virtual Machine Platform
 VMware Fusion
-#Ubuntu VM Specification
+##Ubuntu VM Specification
 Mem: 8GB
 Storage: 20GB
 CPU Architecture: AMD64
 Image: ubuntu-22.04.4-desktop-amd64.iso
 System: Ubuntu 22.04.4 LTS
 
-#System preparation
-sudo apt-get update
-sudo apt-get install vim
-sudo apt install docker.io
-sudo apt install net-tools
-sudo apt install curl
+##Steps to Build a ONOS cluster with Mininet:
+1. Download the marionette_onos.zip
+2. Extract it to the home folder and change privilege 
+'''cd marionette_onos
+sudo chmod 774 sys_prepare build_atomix_dockers.sh build_onos_dockers.sh mn_run.py restart_onos_cluster.sh
+'''
+3. Prepare the system, $USER_NAME is the recent user of your ubuntu system 
+'''sudo ./sys_prepare $USER_NAME '''
+4. Install and run atomix dockers
+'''./build_atomix_dockers.sh '''
+5. Install and run onos dockers
+'''./build_onos_dockers.sh '''
+6. Login the ONOS UI
+click Firefox, access http://172.17.0.5:8181/onos/ui, http://172.17.0.6:8181/onos/ui, http://172.17.0.7:8181/onos/ui
+    user: onos
+    password: rocks
 
-#Add $USER to the docker group
-sudo usermod -aG docker $USER
-#Activate the changes to group
-newgrp docker
-#Pull atomix docker
-docker pull atomix/atomix:3.1.5
-#Run three atomix dockers
-docker run -t -d --name atomix-1 atomix/atomix:3.1.5
-docker run -t -d --name atomix-2 atomix/atomix:3.1.5
-docker run -t -d --name atomix-3 atomix/atomix:3.1.5 
-#Inspect atomix docker
-docker inspect atomix-1 | grep -i ipaddress
-docker inspect atomix-2 | grep -i ipaddress
-docker inspect atomix-3 | grep -i ipaddress
-#IPAddress is empty
+7. After the onos UI loaded, there should be three ONOS listed on each of the UIs as they build a cluster.
+8. On the http://172.17.0.5:8181/onos/ui, click the menu on top left, go to Application, search openflow, choose OpenFlow Provider Suite, click the triangle on the top right to activate this application, confirm-> Okay.
+9. Still on the Application list, search fwd, choose Reactive Forwarding, click the triangle on top right to activate this application, confirm-> Okay.
 
-#Check out ONOS source code to get the tool
- to generate atomix configuration files
-#Generate Atomix config files, path is under onos source code
+10. Run Mininet to connect with ONOS-1 and ONOS-2 but not ONOS-3
+'''sudo ./mn_run.sh '''
+Wait for a second and go back to refresh the browsers each of the three controller, you should be able to see a 5-node topology. 
+11. Trigger Host Discovery
+on mininet termial
+''' h1 ping h2 '''
+12. Host Discovery on UIs
+    on UIs, hit the button 'H', the hosts will show up. For details, see https://pica8-fs.atlassian.net/wiki/spaces/PicOS433sp/pages/4063290/ovs-ofctl+add-flow+bridge+flow.
+13. Correct Shortest Path Routing
+Please notice that the shortest path between h1 and h2 is sw1->sw4->sw5
 
-git clone https://gerrit.onosproject.org/onos
-cd onos
-./tools/test/bin/atomix-gen-config 172.17.0.2 ~/atomix-1.conf 172.17.0.2 172.17.0.3 172.17.0.4
-./tools/test/bin/atomix-gen-config 172.17.0.3 ~/atomix-2.conf 172.17.0.2 172.17.0.3 172.17.0.4
-./tools/test/bin/atomix-gen-config 172.17.0.4 ~/atomix-3.conf 172.17.0.2 172.17.0.3 172.17.0.4
+## Marionette attack
+1. Initiate the attack on ONOS-3
+Open another terimal
+'''cd marionette_onos'''
+./topo_poison.sh 7 
+NOTE: 7 is the last digit of onos-3's ip address which means we want to attack from onos-3
 
-#Copy Atomix config files to docker images
-docker cp ~/atomix-1.conf atomix-1:/opt/atomix/conf/atomix.conf
-docker cp ~/atomix-2.conf atomix-2:/opt/atomix/conf/atomix.conf
-docker cp ~/atomix-3.conf atomix-3:/opt/atomix/conf/atomix.conf
+2. See the attack consequence
+Wait for a second and refresh the UIs. 
+The topology changes will be captured and the shortest path from h1 to h2 is sw1->sw2->sw5 now.
 
-#Restart Atomix docker instances for configurtion to take effect
-docker restart atomix-1
-docker restart atomix-2
-docker restart atomix-3
-
-#Inspect the docker IPAddress configuration
-docker inspect atomix-1 | grep -i ipaddress
-docker inspect atomix-2 | grep -i ipaddress
-docker inspect atomix-3 | grep -i ipaddress
-
-#Login ONOS GUI
-Run Firefox
-access http://172.17.0.5:8181/onos/ui
-Username: onos
-Password: rocks
-
-#Build Mininet on the VM
-sudo apt-get install mininet
-#Run mininet with customized topology and connect to onos-1 onos-2 but not onos-3
+#Part 2: Marionette as an Application on OpenDaylight
 
