@@ -1,24 +1,26 @@
-#Introduction:
-Marionette is a new topology poisoning technique that manipulates OpenFlow link discovery packet forwarding to alter topology information. Our technique introduces a globalized topology poisoning attack that leverages control privileges. Marionette implements a reinforcement learning algorithm to compute a poisoned topology target, and injects flow entries to achieve a long-lived stealthy attack. In this artifact, we use the open-source SDN controller ONOS and OpenDaylight to demonstrate our attack. There are two parts of this artifact. In Part 1, we have a simple topology to demonstrate the proof-of-concept functionality (i.e. precise link manipulation and misleading routing). In Part 2, we provide a complete attack starting with computing a deceptive topology with Reinforcement Learning and then implementing the poisonous flow entries to make the learned deceptive topology happen based on an enterprise fat tree topology. In details:
+# Security Issue Explanation: 
+This artifact should be safe to implement in a cloud environment even if the environment has real SDN controllers. That is because (1) the virtual network (Mininet) and the controllers (ONOS and OpenDaylight) are either on a virtual machine or a docker. (2) We have specified the IP addresses of our testbed controllers in the scripts such that the Marionette will not connect with a real-world controller to attack any real-world network.
 
-Part 1: Marionette attacks ONOS cluster from a malicious ONOS to manipulate links on a 5-node topology with Mininet to demonstrate its capability of precise link manipulation while maintaining the same degree sequence. We will also demonstrate the difference of the routings by ONOS reactive forwarding before and after the attack. 
+# Introduction:
+Marionette is a new topology poisoning technique that manipulates OpenFlow link discovery packet forwarding to alter topology information. Our technique introduces a globalized topology poisoning attack that leverages control privileges. Marionette implements a reinforcement learning algorithm to compute a poisoned topology target and injects flow entries to achieve a long-lived stealthy attack. We use the open-source SDN controller ONOS cluster and OpenDaylight to demonstrate our attack. There are two parts of this artifact. In Part 1, we have a simple topology to demonstrate the proof-of-concept functionality (i.e. precise link manipulation and misleading routing). In Part 2, we provide a complete attack starting with computing a deceptive topology with Reinforcement Learning and then implementing the poisonous flow entries to make the learned deceptive topology happen based on an enterprise fat tree topology. In details:
 
-Part 2: Marionette attacks OpenDaylight from a malicious application with the goal of attracting more flows to an eavesdropping point. Step 1: the Marionette collect nodes and topology information to learn a deceptive topology based on an enterprise fat tree topology to meet the attack goal. Step 2: the Marionette compose corresponding poisonous flow entries to mislead the OpenDaylight controller to learn a deceptive topology as we designed in Step 1.  
+## Part 1: Proof-of-Concept Demonstration
+Marionette attacks ONOS cluster from a malicious ONOS to manipulate links on a 5-node topology with Mininet to demonstrate its capability of precise link manipulation while maintaining the same degree sequence. We will also demonstrate the difference in the routings by ONOS reactive forwarding before and after the attack. 
 
-Security Issue Explanation: This artifact should be safe to implement on a cloud environment even if the environment has real SDN controllers. That is because: (1) the virtual network (Mininet) and the controllers (ONOS and OpenDaylight) are either on a virtual machine or a docker. (2) We have specified the IP addresses of our testbed controllers in the scripts such that the Marionette will not connect with a real-world controller to attack any real-world network.
+## Part 2: Marionette Attack on Fat-Tree Topology
+Marionette attacks OpenDaylight from a malicious application to attract more flows to an eavesdropping point. Step 1: The Marionette collects nodes and topology information to learn a deceptive topology based on an enterprise fat-tree topology to meet the attack goal. Step 2: The Marionette composes corresponding poisonous flow entries to mislead the OpenDaylight controller to learn a deceptive topology as we designed in Step 1.  
 
-
-#Part 1: Marionette on ONOS cluster
-##Virtual Machine Platform
+# Part 1 Demonstration: Marionette on ONOS Cluster
+## Virtual Machine Platform
 VMware Fusion
-##Ubuntu VM Specification
+## Ubuntu VM Specification
 Mem: 8GB
 Storage: 20GB
 CPU Architecture: AMD64
 Image: ubuntu-22.04.4-desktop-amd64.iso
 System: Ubuntu 22.04.4 LTS
 
-##Steps to Build a ONOS cluster with Mininet:
+## Steps to Build a ONOS cluster with Mininet:
 1. Download the marionette_onos.zip
 2. Extract it to the home folder and change privilege 
 '''cd marionette_onos
@@ -61,5 +63,5 @@ NOTE: 7 is the last digit of onos-3's ip address which means we want to attack f
 Wait for a second and refresh the UIs. 
 The topology changes will be captured and the shortest path from h1 to h2 is sw1->sw2->sw5 now.
 
-#Part 2: Marionette as an Application on OpenDaylight
+# Part 2 Demonstration: Marionette as an Application on OpenDaylight
 
