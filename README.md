@@ -22,45 +22,45 @@ System: Ubuntu 22.04.4 LTS
 
 ## Steps to Build a ONOS cluster with Mininet:
 1. Download the marionette_onos.zip
-2. Extract it to the home folder and change privilege 
-'''bash
-cd marionette_onos
-sudo chmod 774 sys_prepare build_atomix_dockers.sh build_onos_dockers.sh mn_run.py restart_onos_cluster.sh
-'''
-4. Prepare the system, $USER_NAME is the recent user of your ubuntu system 
-'''sudo ./sys_prepare $USER_NAME '''
-5. Install and run atomix dockers
-'''./build_atomix_dockers.sh '''
-6. Install and run onos dockers
-'''./build_onos_dockers.sh '''
-7. Login the ONOS UI
+2. Extract it to the home folder and change privilege
+   ```bash
+   cd marionette_onos
+   sudo chmod 774 sys_prepare build_atomix_dockers.sh build_onos_dockers.sh mn_run.py restart_onos_cluster.sh
+   ```
+4. Prepare the system, $USER_NAME is the recent user of your ubuntu system
+   ```sudo ./sys_prepare $USER_NAME```
+6. Install and run atomix dockers
+   ```./build_atomix_dockers.sh```
+8. Install and run onos dockers
+   ```./build_onos_dockers.sh```
+10. Login the ONOS UI
 click Firefox, access http://172.17.0.5:8181/onos/ui, http://172.17.0.6:8181/onos/ui, http://172.17.0.7:8181/onos/ui
     user: onos
     password: rocks
 
-8. After the onos UI loaded, there should be three ONOS listed on each of the UIs as they build a cluster.
-9. On the http://172.17.0.5:8181/onos/ui, click the menu on top left, go to Application, search openflow, choose OpenFlow Provider Suite, click the triangle on the top right to activate this application, confirm-> Okay.
-10. Still on the Application list, search fwd, choose Reactive Forwarding, click the triangle on top right to activate this application, confirm-> Okay.
+11. After the onos UI loaded, there should be three ONOS listed on each of the UIs as they build a cluster.
+12. On the http://172.17.0.5:8181/onos/ui, click the menu on top left, go to Application, search openflow, choose OpenFlow Provider Suite, click the triangle on the top right to activate this application, confirm-> Okay.
+13. Still on the Application list, search fwd, choose Reactive Forwarding, click the triangle on top right to activate this application, confirm-> Okay.
 
-11. Run Mininet to connect with ONOS-1 and ONOS-2 but not ONOS-3
-'''sudo ./mn_run.sh '''
+14. Run Mininet to connect with ONOS-1 and ONOS-2 but not ONOS-3
+    ```sudo ./mn_run.sh```
 Wait for a second and go back to refresh the browsers each of the three controller, you should be able to see a 5-node topology. 
-12. Trigger Host Discovery
-on mininet termial
-''' h1 ping h2 '''
-13. Host Discovery on UIs
+16. Trigger Host Discovery
+    on mininet terminal
+    ```mininet>h1 ping h2```
+18. Host Discovery on UIs
     on UIs, hit the button 'H', the hosts will show up. For details, see https://pica8-fs.atlassian.net/wiki/spaces/PicOS433sp/pages/4063290/ovs-ofctl+add-flow+bridge+flow.
-14. Correct Shortest Path Routing
+19. Correct Shortest Path Routing
 Please notice that the shortest path between h1 and h2 is sw1->sw4->sw5
 
 ## Marionette attack
 1. Initiate the attack on ONOS-3
-Open another terimal
-'''cd marionette_onos'''
-./topo_poison.sh 7 
+   Open another terminal
+   ```cd marionette_onos```
+   ```./topo_poison.sh 7```
 NOTE: 7 is the last digit of onos-3's ip address which means we want to attack from onos-3
 
-2. See the attack consequence
+3. See the attack consequence
 Wait for a second and refresh the UIs. 
 The topology changes will be captured and the shortest path from h1 to h2 is sw1->sw2->sw5 now.
 
