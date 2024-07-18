@@ -23,7 +23,7 @@ System: Ubuntu 22.04.4 LTS
 ## Steps to Build a ONOS cluster with Mininet:
 1. Download the marionette_onos.zip
 2. Extract it to the home folder and change privilege
-   ```bash
+   ```
    cd marionette_onos
    sudo chmod 774 sys_prepare build_atomix_dockers.sh build_onos_dockers.sh mn_run.py restart_onos_cluster.sh
    ```
