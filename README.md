@@ -15,9 +15,13 @@ Marionette attacks OpenDaylight from a malicious application to attract more flo
 VMware Fusion
 ## Ubuntu VM Specification
 Mem: 8GB
+
 Storage: 20GB
+
 CPU Architecture: AMD64
+
 Image: ubuntu-22.04.4-desktop-amd64.iso
+
 System: Ubuntu 22.04.4 LTS
 
 ## Steps to Build a ONOS cluster with Mininet:
