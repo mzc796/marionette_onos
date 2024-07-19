@@ -39,7 +39,8 @@ Installation Disc: ubuntu-22.04.4-desktop-amd64.iso
 14. Run Mininet to connect with ONOS-1 and ONOS-2 but not ONOS-3
     
     ```sudo ./mn_run.sh```
-Wait for a second and go back to refresh the browsers for each of the three controllers, you should be able to see a 5-node topology. 
+    
+    Wait for seconds and go back to refresh the browsers for each of the three controllers, you should be able to see a 5-node topology. 
 16. Trigger Host Discovery
     on Mininet terminal:
     
