@@ -37,7 +37,7 @@ Installation Disc: ubuntu-22.04.4-desktop-amd64.iso
 12. On http://172.17.0.5:8181/onos/ui, click the menu on the top left, go to Application, search openflow, choose OpenFlow Provider Suite, click the triangle on the top right to activate this application, confirm-> Okay.
 13. Still on the Application list, search fwd, choose Reactive Forwarding, click the triangle on the top right to activate this application, confirm-> Okay.
 
-14. Run Mininet to connect with ONOS-1 and ONOS-2 but not ONOS-3
+14. Run Mininet to connect with ONOS-1 and ONOS-2 but not ONOS-3.
     
     ```sudo ./mn_run.sh```
     
@@ -52,8 +52,7 @@ Installation Disc: ubuntu-22.04.4-desktop-amd64.iso
 Please notice that the shortest path between h1 and h2 is sw1->sw4->sw5
 
 ## Marionette Attack
-1. Initiate the attack on ONOS-3
-   Open another terminal,
+1. Open another terminal to initiate the attack on ONOS-3
    ```
    cd marionette_onos
    ./topo_poison.sh 7
