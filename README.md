@@ -22,10 +22,16 @@ NOTE: After installation and reboot, please don't select `Install Now` when the 
 3. Prepare the system, $USER_NAME is the recent user of your Ubuntu system.
    
    ```sudo ./sys_prep.sh $USER_NAME```
-4. Switch to $USER_NAME and back to marionette_onos-master folder
+4. Add $USER to the docker group
+   ```
+   sudo usermod -aG docker $1
+   Activate the changes to group
+   newgrp docker
+   ```
+5. Switch to $USER_NAME and back to marionette_onos-master folder
    ```
    su - $USER_NAME
-   cd marionette_onos-master
+   cd marionette_onos-master\
    ```
 6. Install and run atomix dockers. We give atomix-1, atomix-2, and atomix-3 IP Addresses 172.17.0.2, 172.17.0.3, and 172.17.0.4, respectively.
    
