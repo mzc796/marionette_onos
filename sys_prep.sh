@@ -9,3 +9,5 @@ sudo usermod -aG docker $1
 #Activate the changes to group
 newgrp docker
 
+# Change to $USER
+su - $1
