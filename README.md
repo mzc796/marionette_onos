@@ -60,7 +60,7 @@ NOTE: After installation and reboot, please don't select `Install Now` when the 
 20. Check Flow Entries and Shortest Path Routing
     
     On the UI, click Menu->Network->Devices. Choose of:0000000000000001 (sw1). On the top right, click `show flow view for selected device`, we can see that sw1 has been configured two flow entries by ```Application: fwd```      to forward the packets of h1 ping h2. Similarly, we will find that sw4 and sw5 are also configured with flow entries to support h1 ping h2. ```sw1->sw4->sw5``` is the shortest path as we can see from the topology.
-21. Stop h1 ping h3 with ```Control+D``` on the Mininet terminal to prepare for the next step demo.
+21. Stop h1 ping h3 with ```Control+C``` on the Mininet terminal to prepare for the next step demo.
 
 ## Marionette Attack
 1. Open another terminal to initiate the attack on ONOS-3
