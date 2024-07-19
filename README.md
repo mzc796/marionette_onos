@@ -1,16 +1,16 @@
 # Introduction:
-Marionette is a new topology poisoning technique that manipulates OpenFlow link discovery packet forwarding to alter topology information. Our technique introduces a globalized topology poisoning attack that leverages control privileges. Marionette implements a reinforcement learning algorithm to compute a poisoned topology target and injects flow entries to achieve a long-lived stealthy attack. We use the open-source SDN controller ONOS and OpenDaylight(ODL) to demonstrate our attack. There are two parts of this artifact. In Part 1 (marionette_onos), we assume one ONOS is malicious in an ONOS cluster and the motivating example topology is connected with them. We build this scenario to demonstrate the proof-of-concept functionality of Marionette (i.e. precise link manipulation and misleading routing). In Part 2 (marionette_odl-0.20.1), we assume an application interacting with ODL by RESTful APIs and the ODL connects to an enterprise fat tree topology. We build this scenario to demonstrate a complete attack starting with computing a deceptive topology with Reinforcement Learning and then implementing the poisonous flow entries to mislead the legitimate controllers to discover the learned deceptive topology independently. 
+Marionette is a new topology poisoning technique that manipulates OpenFlow link discovery packet forwarding to alter topology information. Our technique introduces a globalized topology poisoning attack that leverages control privileges. Marionette implements a reinforcement learning algorithm to compute a poisoned topology target and injects flow entries to achieve a long-lived stealthy attack. We use the open-source SDN controller ONOS and OpenDaylight (ODL) to demonstrate our attack. There are two parts of this artifact. In Part 1 (marionette_onos-master), we assume one ONOS is malicious in an ONOS cluster and the motivating example topology connectes with them. We build this scenario to demonstrate the proof-of-concept functionality of Marionette (i.e. precise link manipulation and misleading routing). In Part 2 (marionette_odl-master), we assume an application interacting with ODL by RESTful APIs and the ODL connects to an enterprise fat tree topology. We build this scenario to demonstrate a complete attack starting with computing a deceptive topology with reinforcement learning, composing the cooresponding poisonous flow entries, and sending them to the Mininet, leading the legitimate controllers discover a deceptive topology as we designed independently. 
 
 ## Security Clarification: 
-This artifact should be safe to implement in a cloud environment even if the environment has real SDN controllers. That is because (1) the virtual network (Mininet) and the controllers (ONOS and OpenDaylight) are either on a virtual machine or a docker. (2) We have either specified the IP addresses Marionette connects to in the scripts, or put Marionette and the controller in the same machine to use `localhost` to access it. As a result, the Marionette will not connect with a real-world controller to attack any real-world network.
+This artifact should be safe to implement in a cloud environment with real SDN controllers. That is because (1) the virtual network (Mininet) and the controllers (ONOS and OpenDaylight) are either on a virtual machine or a docker. (2) We have either specified the IP addresses Marionette connects to in the scripts, or put Marionette and the controller in the same machine to use `localhost` to interact with each other. As a result, the Marionette will not connect with a real-world controller to be able to attack any real-world network.
 
 ## Part 1: 
 
-Please download marionette_onos.zip and follow the instruction in marionette_onos/README.md
+Please download marionette_onos-master.zip and follow the instruction in marionette_onos-master/README.md
 
 ## Part 2: 
 
-Please download marionette_odl.zip and follow the instruction in marionette_odl/README.md
+Please download marionette_odl-master.zip and follow the instruction in marionette_odl-master/README.md
 
 
 
