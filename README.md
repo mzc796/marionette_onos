@@ -24,23 +24,23 @@ Installation Disc: ubuntu-22.04.4-desktop-amd64.iso
 8. Install and run onos dockers. The onos-1, onos-2, onos-3 have IP Addresses 172.17.0.5, 172.17.0.6, and 172.17.0.7, respectively.
    ```./build_onos_dockers.sh```
 10. Login the ONOS UI
-click Firefox, access http://172.17.0.5:8181/onos/ui, http://172.17.0.6:8181/onos/ui, http://172.17.0.7:8181/onos/ui
+    click Firefox, access http://172.17.0.5:8181/onos/ui, http://172.17.0.6:8181/onos/ui, http://172.17.0.7:8181/onos/ui
 ```
     user: onos
     password: rocks
 ```
-11. After the onos UI loaded, there should be three ONOS listed on each of the UIs as they build a cluster.
-12. On the http://172.17.0.5:8181/onos/ui, click the menu on the top left, go to Application, search openflow, choose OpenFlow Provider Suite, click the triangle on the top right to activate this application, confirm-> Okay.
-13. Still on the Application list, search fwd, choose Reactive Forwarding, click the triangle on top right to activate this application, confirm-> Okay.
+11. After the ONOS UI is loaded, there should be three ONOS listed on each of the UIs as they build a cluster.
+12. On http://172.17.0.5:8181/onos/ui, click the menu on the top left, go to Application, search openflow, choose OpenFlow Provider Suite, click the triangle on the top right to activate this application, confirm-> Okay.
+13. Still on the Application list, search fwd, choose Reactive Forwarding, click the triangle on the top right to activate this application, confirm-> Okay.
 
 14. Run Mininet to connect with ONOS-1 and ONOS-2 but not ONOS-3
     ```sudo ./mn_run.sh```
-Wait for a second and go back to refresh the browsers each of the three controller, you should be able to see a 5-node topology. 
+Wait for a second and go back to refresh the browsers for each of the three controllers, you should be able to see a 5-node topology. 
 16. Trigger Host Discovery
-    on mininet terminal
+    on Mininet terminal
     ```mininet>h1 ping h2```
 18. Host Discovery on UIs
-    on UIs, hit the button 'H', the hosts will show up. For details, see https://pica8-fs.atlassian.net/wiki/spaces/PicOS433sp/pages/4063290/ovs-ofctl+add-flow+bridge+flow.
+    on UIs, hit the button 'H', and the hosts will show up. For details, see https://pica8-fs.atlassian.net/wiki/spaces/PicOS433sp/pages/4063290/ovs-ofctl+add-flow+bridge+flow.
 19. Correct Shortest Path Routing
 Please notice that the shortest path between h1 and h2 is sw1->sw4->sw5
 
@@ -49,7 +49,7 @@ Please notice that the shortest path between h1 and h2 is sw1->sw4->sw5
    Open another terminal
    ```cd marionette_onos```
    ```./topo_poison.sh 7```
-NOTE: 7 is the last digit of onos-3's ip address which means we want to attack from onos-3
+NOTE: 7 is the last digit of onos-3's IP address which means we want to attack from onos-3
 
 3. See the attack consequence
 Wait for a second and refresh the UIs. 
