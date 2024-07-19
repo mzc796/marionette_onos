@@ -9,7 +9,7 @@ do
    echo "Checking onos-$i ip address"
    IP=$(sudo docker inspect onos-$i | grep IPAddress | cut -d '"' -f 4 | head -2)
    echo "Generate onos-$i configuration files using docker ip $IP"
-   cd ~/marionette_onos/onos
+   cd ~/marionette_onos-master/onos
    ./tools/test/bin/onos-gen-config $IP ~/cluster-$i.json -n 172.17.0.2 172.17.0.3 172.17.0.4
    echo "Create configuration directory for onos-$i"
    docker exec onos-$i mkdir /root/onos/config
