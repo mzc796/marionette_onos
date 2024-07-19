@@ -57,7 +57,7 @@ Please notice that the shortest path between h1 and h2 is sw1->sw4->sw5
    cd marionette_onos
    ./topo_poison.sh 7
    ```
-NOTE: 7 is the last digit of onos-3's IP address which means we want to attack from onos-3
+   NOTE: 7 is the last digit of onos-3's IP address which means we want to attack from onos-3
 
 3. See the attack consequence
 Wait for a second and refresh the UIs. 
