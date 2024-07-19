@@ -22,10 +22,9 @@ NOTE: After installation and reboot, please don't select `Install Now` when the 
 3. Prepare the system.
    
    ```sudo ./sys_prep.sh```
-4. Add $USER to the docker group, $USER is the recent user of your Ubuntu system
+4. Add and activate $USER to the docker group. $USER is the recent user of your Ubuntu system
    ```
    sudo usermod -aG docker $USER
-   Activate the changes to group
    newgrp docker
    ```
 5. Switch to $USER_NAME and back to marionette_onos-master folder
