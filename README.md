@@ -11,7 +11,7 @@ CPU: 2 cores, AMD64 Architecture
 
 Installation Disc: ubuntu-22.04.4-desktop-amd64.iso
 
-## Build a ONOS Cluster with Mininet:
+## Build and Run an ONOS Cluster with Mininet:
 1. Download the marionette_onos.zip
 2. Extract it to the home folder and change the privilege
    ```
@@ -59,7 +59,7 @@ Please notice that the shortest path between h1 and h2 is sw1->sw4->sw5
    ```
    NOTE: 7 is the last digit of onos-3's IP address which means we want to attack from onos-3
 
-3. See the attack consequence
+### Result
 Wait for a second and refresh the UIs. 
 The topology changes will be captured and the shortest path from h1 to h2 is sw1->sw2->sw5 now.
 
