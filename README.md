@@ -3,8 +3,11 @@
 VMware Fusion
 ## Virtual Machine Summary
 Memory: 8GB
+
 Storage: 20GB
+
 CPU: 2 cores, AMD64 Architecture
+
 Installation Disc: ubuntu-22.04.4-desktop-amd64.iso
 
 ## Steps to Build a ONOS cluster with Mininet:
