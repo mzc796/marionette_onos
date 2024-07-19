@@ -133,4 +133,4 @@ On the docker terminal:
    docker restart onos-mal
    ```
 
-   Refresh the UIs and we will see onos-mal join the cluster successfully.
+   Wait for seconds and refresh the UIs. We will see onos-mal join the cluster successfully.
