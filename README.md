@@ -52,9 +52,12 @@ NOTE: After installation and reboot, please don't select `Install Now` when the 
     on Mininet terminal:
     
     ```mininet>h1 ping h2```
+    
+    On the UI, click Menu->Network->Hosts, we will find h1 and h2.
 18. Host Discovery on UIs
-    on UIs, hit the button 'H', and the hosts will show up. For details, see https://pica8-fs.atlassian.net/wiki/spaces/PicOS433sp/pages/4063290/ovs-ofctl+add-flow+bridge+flow.
-19. Correct Shortest Path Routing
+    
+    On Topology GUI, hit the button 'H', and the hosts will show up. For details, see https://pica8-fs.atlassian.net/wiki/spaces/PicOS433sp/pages/4063290/ovs-ofctl+add-flow+bridge+flow.
+20. Correct Shortest Path Routing
 Please notice that the shortest path between h1 and h2 is sw1->sw4->sw5
 
 ## Marionette Attack
