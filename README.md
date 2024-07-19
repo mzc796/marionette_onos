@@ -57,8 +57,9 @@ NOTE: After installation and reboot, please don't select `Install Now` when the 
 18. Host Discovery on UIs
     
     On Topology GUI, hit the button 'H', and the hosts will show up. For details, see https://pica8-fs.atlassian.net/wiki/spaces/PicOS433sp/pages/4063290/ovs-ofctl+add-flow+bridge+flow.
-20. Correct Shortest Path Routing
-Please notice that the shortest path between h1 and h2 is sw1->sw4->sw5
+20. Check Flow Entries and Shortest Path Routing
+    
+    On the UI, click Menu->Network->Devices. Choose of:0000000000000001 (sw1). On the top right, click `show flow view for selected device`, we can see that sw1 has been configured two flow entries by ```Application: fwd```      to forward the packets of h1 ping h2. Similarly, we will find that sw4 and sw5 are also configured with flow entries to support h1 ping h2. ```sw1->sw4->sw5``` is the shortest path as we can see from the topology.
 
 ## Marionette Attack
 1. Open another terminal to initiate the attack on ONOS-3
