@@ -16,7 +16,7 @@ NOTE: After installation and reboot, please don't select `Install Now` when the 
 1. Download the marionette_onos-master.zip
 2. Extract it to the home folder and change the privilege
    ```
-   cd marionette_onos-master
+   cd marionette_onos-master/
    sudo chmod 774 sys_prep.sh build_atomix_dockers.sh build_onos_dockers.sh mn_run.py restart_onos_cluster.sh
    ```
 3. Prepare the system.
@@ -44,8 +44,12 @@ NOTE: After installation and reboot, please don't select `Install Now` when the 
 13. Still on the Application list, search fwd, choose Reactive Forwarding, click the triangle on the top right to activate this application, confirm-> Okay.
 
 14. Run Mininet to connect with ONOS-1 and ONOS-2 but not ONOS-3.
-    
-    ```sudo ./mn_run.sh```
+
+    Open another teriminal
+    ```
+    cd marionette_onos_master/
+    sudo ./mn_run.sh
+    ```
     
     Wait for seconds and go back to refresh the browsers for each of the three controllers, you should be able to see a 5-node topology. 
 16. Trigger Host Discovery
@@ -57,6 +61,7 @@ NOTE: After installation and reboot, please don't select `Install Now` when the 
 18. Host Discovery on UIs
     
     On Topology GUI, hit the button 'H', and the hosts will show up. For details, see https://pica8-fs.atlassian.net/wiki/spaces/PicOS433sp/pages/4063290/ovs-ofctl+add-flow+bridge+flow.
+    NOTE: Now we can see the shortest path from h1 to h2 is ```h1->sw1->sw4->sw5->h2``` as shown on the Topology GUI.
 20. Check Flow Entries and Shortest Path Routing
     
     On the UI, click Menu->Network->Devices. Choose of:0000000000000001 (sw1). On the top right, click `show flow view for selected device`, we can see that sw1 has been configured two flow entries by ```Application: fwd```      to forward the packets of h1 ping h2. Similarly, we will find that sw4 and sw5 are also configured with flow entries to support h1 ping h2. ```sw1->sw4->sw5``` is the shortest path as we can see from the topology.
@@ -71,8 +76,60 @@ NOTE: After installation and reboot, please don't select `Install Now` when the 
    NOTE: 7 is the last digit of onos-3's IP address which means we want to attack from onos-3
 
 ### Result
-Wait for a second and refresh the UIs. 
-The topology changes will be captured and the shortest path from h1 to h2 is sw1->sw2->sw5 now.
+1. The dynamic topology can be noticed on the ONOS UIs.
+2. Refresh the Web UIs to clear cached expired links. The topology seems the same as before since the degree sequence is maintained. But now, sw1 connects to sw2 and sw3 is between s1 and sw4, showing the success of the Marionette attack.
+3. Now we can see the shortest path from h1 to h2 is ```h1->sw1->sw2->sw5->h2``` as shown on the Topology GUI.
+4. On Mininet terminal, ```mininet> h1 ping h2```. On ONOS UIs, we will find that sw1, sw2, and sw5 have flow entries configured by ```Application: fwd```, which means the legitimate ONOS-1, ONOS-2 discover
 
 
+## Controller Impersonating Attack (Optional)
+We also found that both the ONOS and OpenDaylight cluster implementations are insecure. If one of the controller peers is down, a malicious controller with an incomplete cluster configuration can join the cluster. This experiment strengthens the motivation of the Marionette work and validates the assumption of a malicious controller in the cluster. 
 
+In the case of this ONOS cluster:
+
+On the docker terminal:
+
+1. We shut down ONOS-3:
+   ```docker stop onos-3```
+
+   Go back to the UIs, the onos-3 disappears.
+2. Build onos-mal and check its IP Address
+   ```
+   docker run -t -d --name onos-mal onosproject/onos:2.2.2
+   docker inspect onos-mal | grep -i ipaddress
+   ```
+
+   It should have the same IP Address as onos-3. If not, configure it to it (172.17.0.7).
+3. Configure the cluster file for onos-mal
+   
+   Create a configuration directory for ONOS docker images
+   ```
+   docker exec onos-mal mkdir /root/onos/config
+   ```
+
+   Replicate cluster-3.json to cluster-mal.json and edit it by removing below (or any two of the three `atomix`s)
+   ```
+   {
+      "id": "atomix-2",
+      "ip": "172.17.0.2",
+      "port": 5679
+    },
+    {
+      "id": "atomix-3",
+      "ip": "172.17.0.3",
+      "port": 5679
+    }
+   ```
+
+   Configure cluster-mal.json to the onos-mal
+
+   ```
+   docker cp ~/cluster-mal.json onos-mal:/root/onos/config/cluster.json
+   ```
+4. Restart the onos-mal
+
+   ```
+   docker restart onos-mal
+   ```
+
+   Refresh the UIs and we will see onos-mal join the cluster successfully.
