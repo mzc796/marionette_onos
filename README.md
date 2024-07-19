@@ -19,9 +19,14 @@ NOTE: After installation and reboot, please don't select `Install Now` when the 
    cd marionette_onos
    sudo chmod 774 sys_prep.sh build_atomix_dockers.sh build_onos_dockers.sh mn_run.py restart_onos_cluster.sh
    ```
-4. Prepare the system, $USER_NAME is the recent user of your Ubuntu system.
+3. Prepare the system, $USER_NAME is the recent user of your Ubuntu system.
    
    ```sudo ./sys_prep.sh $USER_NAME```
+4. Switch to $USER_NAME and back to marionette_onos folder
+   ```
+   su - m
+   cd marionette_onos
+   ```
 6. Install and run atomix dockers. We give atomix-1, atomix-2, and atomix-3 IP Addresses 172.17.0.2, 172.17.0.3, and 172.17.0.4, respectively.
    
    ```./build_atomix_dockers.sh```
