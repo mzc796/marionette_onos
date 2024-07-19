@@ -19,12 +19,12 @@ NOTE: After installation and reboot, please don't select `Install Now` when the 
    cd marionette_onos-master
    sudo chmod 774 sys_prep.sh build_atomix_dockers.sh build_onos_dockers.sh mn_run.py restart_onos_cluster.sh
    ```
-3. Prepare the system, $USER_NAME is the recent user of your Ubuntu system.
+3. Prepare the system.
    
-   ```sudo ./sys_prep.sh $USER_NAME```
-4. Add $USER to the docker group
+   ```sudo ./sys_prep.sh```
+4. Add $USER to the docker group, $USER is the recent user of your Ubuntu system
    ```
-   sudo usermod -aG docker $1
+   sudo usermod -aG docker $USER
    Activate the changes to group
    newgrp docker
    ```
