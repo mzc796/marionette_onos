@@ -11,7 +11,7 @@ CPU: 2 cores, AMD64 Architecture
 
 Installation Disc: ubuntu-22.04.4-desktop-amd64.iso
 
-## Steps to Build a ONOS cluster with Mininet:
+## Build a ONOS Cluster with Mininet:
 1. Download the marionette_onos.zip
 2. Extract it to the home folder and change the privilege
    ```
@@ -51,7 +51,7 @@ Installation Disc: ubuntu-22.04.4-desktop-amd64.iso
 19. Correct Shortest Path Routing
 Please notice that the shortest path between h1 and h2 is sw1->sw4->sw5
 
-## Marionette attack
+## Marionette Attack
 1. Initiate the attack on ONOS-3
    Open another terminal,
    ```
