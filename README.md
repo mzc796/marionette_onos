@@ -24,7 +24,7 @@ NOTE: After installation and reboot, please don't select `Install Now` when the 
    ```sudo ./sys_prep.sh $USER_NAME```
 4. Switch to $USER_NAME and back to marionette_onos folder
    ```
-   su - m
+   su - $USER_NAME
    cd marionette_onos
    ```
 6. Install and run atomix dockers. We give atomix-1, atomix-2, and atomix-3 IP Addresses 172.17.0.2, 172.17.0.3, and 172.17.0.4, respectively.
