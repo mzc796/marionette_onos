@@ -1,49 +1,33 @@
-# Security Issue Explanation: 
-This artifact should be safe to implement in a cloud environment even if the environment has real SDN controllers. That is because (1) the virtual network (Mininet) and the controllers (ONOS and OpenDaylight) are either on a virtual machine or a docker. (2) We have specified the IP addresses of our testbed controllers in the scripts such that the Marionette will not connect with a real-world controller to attack any real-world network.
-
-# Introduction:
-Marionette is a new topology poisoning technique that manipulates OpenFlow link discovery packet forwarding to alter topology information. Our technique introduces a globalized topology poisoning attack that leverages control privileges. Marionette implements a reinforcement learning algorithm to compute a poisoned topology target and injects flow entries to achieve a long-lived stealthy attack. We use the open-source SDN controller ONOS cluster and OpenDaylight to demonstrate our attack. There are two parts of this artifact. In Part 1, we have a simple topology to demonstrate the proof-of-concept functionality (i.e. precise link manipulation and misleading routing). In Part 2, we provide a complete attack starting with computing a deceptive topology with Reinforcement Learning and then implementing the poisonous flow entries to make the learned deceptive topology happen based on an enterprise fat tree topology. In details:
-
-## Part 1: Proof-of-Concept Demonstration
-Marionette attacks ONOS cluster from a malicious ONOS to manipulate links on a 5-node topology with Mininet to demonstrate its capability of precise link manipulation while maintaining the same degree sequence. We will also demonstrate the difference in the routings by ONOS reactive forwarding before and after the attack. 
-
-## Part 2: Marionette Attack on Fat-Tree Topology
-Marionette attacks OpenDaylight from a malicious application to attract more flows to an eavesdropping point. Step 1: The Marionette collects nodes and topology information to learn a deceptive topology based on an enterprise fat-tree topology to meet the attack goal. Step 2: The Marionette composes corresponding poisonous flow entries to mislead the OpenDaylight controller to learn a deceptive topology as we designed in Step 1.  
-
 # Part 1 Demonstration: Marionette on ONOS Cluster
 ## Virtual Machine Platform
 VMware Fusion
-## Ubuntu VM Specification
-Mem: 8GB
-
+## Virtual Machine Summary
+Memory: 8GB
 Storage: 20GB
-
-CPU Architecture: AMD64
-
-Image: ubuntu-22.04.4-desktop-amd64.iso
-
-System: Ubuntu 22.04.4 LTS
+CPU: 2 cores, AMD64 Architecture
+Installation Disc: ubuntu-22.04.4-desktop-amd64.iso
 
 ## Steps to Build a ONOS cluster with Mininet:
 1. Download the marionette_onos.zip
-2. Extract it to the home folder and change privilege
+2. Extract it to the home folder and change the privilege
    ```
    cd marionette_onos
    sudo chmod 774 sys_prepare build_atomix_dockers.sh build_onos_dockers.sh mn_run.py restart_onos_cluster.sh
    ```
-4. Prepare the system, $USER_NAME is the recent user of your ubuntu system
+4. Prepare the system, $USER_NAME is the recent user of your Ubuntu system
    ```sudo ./sys_prepare $USER_NAME```
-6. Install and run atomix dockers
+6. Install and run atomix dockers. We give atomix-1, atomix-2, and atomix-3 IP Addresses 172.17.0.2, 172.17.0.3, and 172.17.0.4, respectively.
    ```./build_atomix_dockers.sh```
-8. Install and run onos dockers
+8. Install and run onos dockers. The onos-1, onos-2, onos-3 have IP Addresses 172.17.0.5, 172.17.0.6, and 172.17.0.7, respectively.
    ```./build_onos_dockers.sh```
 10. Login the ONOS UI
 click Firefox, access http://172.17.0.5:8181/onos/ui, http://172.17.0.6:8181/onos/ui, http://172.17.0.7:8181/onos/ui
+```
     user: onos
     password: rocks
-
+```
 11. After the onos UI loaded, there should be three ONOS listed on each of the UIs as they build a cluster.
-12. On the http://172.17.0.5:8181/onos/ui, click the menu on top left, go to Application, search openflow, choose OpenFlow Provider Suite, click the triangle on the top right to activate this application, confirm-> Okay.
+12. On the http://172.17.0.5:8181/onos/ui, click the menu on the top left, go to Application, search openflow, choose OpenFlow Provider Suite, click the triangle on the top right to activate this application, confirm-> Okay.
 13. Still on the Application list, search fwd, choose Reactive Forwarding, click the triangle on top right to activate this application, confirm-> Okay.
 
 14. Run Mininet to connect with ONOS-1 and ONOS-2 but not ONOS-3
@@ -68,5 +52,5 @@ NOTE: 7 is the last digit of onos-3's ip address which means we want to attack f
 Wait for a second and refresh the UIs. 
 The topology changes will be captured and the shortest path from h1 to h2 is sw1->sw2->sw5 now.
 
-# Part 2 Demonstration: Marionette as an Application on OpenDaylight
+
 
