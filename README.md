@@ -47,7 +47,7 @@ NOTE: After installation and reboot, please don't select `Install Now` when the 
 
     Open another teriminal
     ```
-    cd marionette_onos_master/
+    cd marionette_onos-master/
     sudo ./mn_run.sh
     ```
     
