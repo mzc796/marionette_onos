@@ -21,7 +21,7 @@ NOTE: After installation and reboot, please don't select `Install Now` when the 
    ```
 4. Prepare the system, $USER_NAME is the recent user of your Ubuntu system.
    
-   ```sudo ./sys_prepare $USER_NAME```
+   ```sudo ./sys_prep.sh $USER_NAME```
 6. Install and run atomix dockers. We give atomix-1, atomix-2, and atomix-3 IP Addresses 172.17.0.2, 172.17.0.3, and 172.17.0.4, respectively.
    
    ```./build_atomix_dockers.sh```
