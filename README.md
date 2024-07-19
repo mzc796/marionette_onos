@@ -17,7 +17,7 @@ NOTE: After installation and reboot, please don't select `Install Now` when the 
 2. Extract it to the home folder and change the privilege
    ```
    cd marionette_onos-master/
-   sudo chmod 774 sys_prep.sh build_atomix_dockers.sh build_onos_dockers.sh mn_run.py restart_onos_cluster.sh
+   sudo chmod 774 sys_prep.sh build_atomix_dockers.sh build_onos_dockers.sh mn_run.sh restart_onos_cluster.sh
    ```
 3. Prepare the system.
    
