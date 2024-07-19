@@ -1,4 +1,4 @@
-# Part 1 Demonstration: Marionette on ONOS Cluster
+# Part 1: Marionette on ONOS Cluster
 ## Virtual Machine Platform
 VMware Fusion
 ## Virtual Machine Summary
