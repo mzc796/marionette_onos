@@ -1,25 +1,3 @@
-# Introduction:
-Marionette is a new topology poisoning technique that manipulates OpenFlow link discovery packet forwarding to alter topology information. Our technique introduces a globalized topology poisoning attack that leverages control privileges. Marionette implements a reinforcement learning algorithm to compute a poisoned topology target and injects flow entries to achieve a long-lived stealthy attack. We use the open-source SDN controller ONOS and OpenDaylight (ODL) to demonstrate our attack. 
-
-There are two parts of this artifact. 
-
-- In Part 1 (marionette_onos-master), we assume one ONOS is malicious in an ONOS cluster and the motivating example topology connectes with them. We build this scenario to demonstrate the proof-of-concept functionalities of Marionette (i.e. precise link manipulation and misleading routing). 
-
-- In Part 2 (marionette_odl-master), we assume an application interacting with ODL by RESTful APIs and the ODL connects to an enterprise fat tree topology. We build this scenario to demonstrate a complete attack starting with computing a deceptive topology with reinforcement learning, composing the cooresponding poisonous flow entries, and sending them to the Mininet, leading the legitimate controllers discover a deceptive topology as we designed independently. 
-
-## Security Clarification: 
-This artifact should be safe to implement in a cloud environment with real SDN controllers. That is because (1) the virtual network (Mininet) and the controllers (ONOS and OpenDaylight) are either on a virtual machine or a docker. (2) We have either specified the IP addresses Marionette connects to in the scripts, or put Marionette and the controller in the same machine to use `localhost` to interact with each other. As a result, the Marionette will not connect with a real-world controller to be able to attack any real-world network.
-
-## Part 1: 
-
-Please download marionette_onos-master.zip and follow the instruction in marionette_onos-master/README.md
-
-## Part 2: 
-
-Please download marionette_odl-master.zip and follow the instruction in marionette_odl-master/README.md
-
-
-
 # Part 1: Marionette on ONOS Cluster with Motivating Example Topology
 Marionette attacks the ONOS cluster from a malicious ONOS to manipulate links in Figure 1 motivating example topology with Mininet to demonstrate its capability of precise link manipulation while maintaining the same degree sequence. We also show the difference in the routings by ONOS reactive forwarding before and after the attack.
 ## Virtual Machine Platform
