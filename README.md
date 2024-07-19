@@ -109,6 +109,7 @@ On the docker terminal:
 
    Replicate cluster-3.json to cluster-mal.json and edit it by removing below (or any two of the three `atomix`s)
    ```
+   ,
    {
       "id": "atomix-2",
       "ip": "172.17.0.2",
