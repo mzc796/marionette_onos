@@ -13,19 +13,19 @@ Installation Disc: ubuntu-22.04.4-desktop-amd64.iso
 
 NOTE: After installation and reboot, please don't select `Install Now` when the window of `Software Updater` pops up. Otherwise, it may cause an error of 'not enough space' later.
 ## Build and Run an ONOS Cluster with Mininet:
-1. Download the marionette_onos.zip
+1. Download the marionette_onos-master.zip
 2. Extract it to the home folder and change the privilege
    ```
-   cd marionette_onos
+   cd marionette_onos-master
    sudo chmod 774 sys_prep.sh build_atomix_dockers.sh build_onos_dockers.sh mn_run.py restart_onos_cluster.sh
    ```
 3. Prepare the system, $USER_NAME is the recent user of your Ubuntu system.
    
    ```sudo ./sys_prep.sh $USER_NAME```
-4. Switch to $USER_NAME and back to marionette_onos folder
+4. Switch to $USER_NAME and back to marionette_onos-master folder
    ```
    su - $USER_NAME
-   cd marionette_onos
+   cd marionette_onos-master
    ```
 6. Install and run atomix dockers. We give atomix-1, atomix-2, and atomix-3 IP Addresses 172.17.0.2, 172.17.0.3, and 172.17.0.4, respectively.
    
@@ -60,7 +60,7 @@ Please notice that the shortest path between h1 and h2 is sw1->sw4->sw5
 ## Marionette Attack
 1. Open another terminal to initiate the attack on ONOS-3
    ```
-   cd marionette_onos
+   cd marionette_onos-master
    ./topo_poison.sh 7
    ```
    NOTE: 7 is the last digit of onos-3's IP address which means we want to attack from onos-3
