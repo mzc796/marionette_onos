@@ -134,3 +134,8 @@ On the docker terminal:
    ```
 
    Wait for seconds and refresh the UIs. We will see onos-mal join the cluster successfully.
+## Discussion
+There are three vulnerabilities we explored in the Marionette work:
+- Insecure controller implementation (Controller Impersonation Attack)
+- Insecure cluster role management (Follower controller without direct connection with the network can still configure the network by altering the cluster datastore)
+- Insecure topology discovery (Flow entries can alter topology discovery result)
