@@ -54,7 +54,7 @@ NOTE: After installation and rebooting the VM, please DO NOT select `Install Now
 
     Open another teriminal
     ```
-    cd marionette_onos-master/
+    cd marionette_onos/
     sudo ./mn_run.sh
     ```
     
@@ -78,7 +78,7 @@ NOTE: After installation and rebooting the VM, please DO NOT select `Install Now
 ## Marionette Attack
 1. Open another terminal to initiate the attack on ONOS-3
    ```
-   cd marionette_onos-master
+   cd marionette_onos
    ./topo_poison.sh 7
    ```
    NOTE: 7 is the last digit of onos-3's IP address which means we want to attack from onos-3
