@@ -20,36 +20,37 @@ NOTE: After installation and rebooting the VM, please DO NOT select `Install Now
 1. Download the ```marionette_onos.zip``` and extract it to $HOME
 
 NOTE: If you download the code from Github and the name is ```marionette_onos-master.zip```, please change the folder name to ```marionette_onos``` after extract it to $HOME.
-3. Change the privilege
+
+2. Change the privilege
    ```
    cd marionette_onos/
    sudo chmod 774 sys_prep.sh build_atomix_dockers.sh build_onos_dockers.sh mn_run.sh restart_onos_cluster.sh
    ```
-4. Prepare the system.
+3. Prepare the system
    
    ```sudo ./sys_prep.sh```
-5. Add and activate $USER to the docker group. $USER is the recent user of your Ubuntu system
+4. Add and activate $USER to the docker group. $USER is the recent user of your Ubuntu system
    ```
    sudo usermod -aG docker $USER
    newgrp docker
    ```
-6. Install and run atomix dockers. We give atomix-1, atomix-2, and atomix-3 IP Addresses 172.17.0.2, 172.17.0.3, and 172.17.0.4, respectively.
+5. Install and run atomix dockers. We give atomix-1, atomix-2, and atomix-3 IP Addresses 172.17.0.2, 172.17.0.3, and 172.17.0.4, respectively.
    
    ```./build_atomix_dockers.sh```
-8. Install and run onos dockers. The onos-1, onos-2, onos-3 have IP Addresses 172.17.0.5, 172.17.0.6, and 172.17.0.7, respectively.
+6. Install and run onos dockers. The onos-1, onos-2, onos-3 have IP Addresses 172.17.0.5, 172.17.0.6, and 172.17.0.7, respectively.
    
    ```./build_onos_dockers.sh```
-10. Login the ONOS UI
+7. Login the ONOS UI
     click Firefox, access http://172.17.0.5:8181/onos/ui, http://172.17.0.6:8181/onos/ui, http://172.17.0.7:8181/onos/ui
 ```
     user: onos
     password: rocks
 ```
-11. After the ONOS UI is loaded, there should be three ONOS listed on each of the UIs as they build a cluster.
-12. On http://172.17.0.5:8181/onos/ui, click the menu on the top left, go to Application, search openflow, choose OpenFlow Provider Suite, click the triangle on the top right to activate this application, confirm-> Okay.
-13. Still on the Application list, search fwd, choose Reactive Forwarding, click the triangle on the top right to activate this application, confirm-> Okay.
+8. After the ONOS UI is loaded, there should be three ONOS listed on each of the UIs as they build a cluster.
+9. On http://172.17.0.5:8181/onos/ui, click the menu on the top left, go to Application, search openflow, choose OpenFlow Provider Suite, click the triangle on the top right to activate this application, confirm-> Okay.
+10. Still on the Application list, search fwd, choose Reactive Forwarding, click the triangle on the top right to activate this application, confirm-> Okay.
 
-14. Run Mininet to connect with ONOS-1 and ONOS-2 but not ONOS-3.
+11. Run Mininet to connect with ONOS-1 and ONOS-2 but not ONOS-3.
 
     Open another teriminal
     ```
@@ -58,21 +59,21 @@ NOTE: If you download the code from Github and the name is ```marionette_onos-ma
     ```
     
     Wait for seconds and go back to refresh the browsers for each of the three controllers, you should be able to see a 5-node topology. 
-16. Trigger Host Discovery
+12. Trigger Host Discovery
     on Mininet terminal:
     
     ```mininet>h1 ping h2```
     
     On the UI, click Menu->Network->Hosts, we will find h1 and h2.
-18. Host Discovery on UIs
+13. Host Discovery on UIs
     
     On Topology GUI, hit the 'H' key on the keyboard, and the hosts will show up. For details, see https://wiki.onosproject.org/display/ONOS/Basic+ONOS+Tutorial#:~:text=To%20toggle%20between%20showing%20and,which%20they%20are%20the%20master.
     
     NOTE: Now we can see the shortest path from h1 to h2 is ```h1->sw1->sw4->sw5->h2``` as shown on the Topology GUI.
-20. Check Flow Entries and Shortest Path Routing
+14. Check Flow Entries and Shortest Path Routing
     
     On the UI, click Menu->Network->Devices. Choose of:0000000000000001 (sw1). On the top right, click `show flow view for selected device`, we can see that sw1 has been configured two flow entries by ```Application: fwd```      to forward the packets of h1 ping h2. Similarly, we will find that sw4 and sw5 are also configured with flow entries to support h1 ping h2. ```sw1->sw4->sw5``` is the shortest path as we can see from the topology.
-21. Stop h1 ping h2 with ```Control+C``` on the Mininet terminal to prepare for the next step demo.
+15. Stop h1 ping h2 with ```Control+C``` on the Mininet terminal to prepare for the next step demo.
 
 ## Marionette Attack
 1. Open another terminal to initiate the attack on ONOS-3
