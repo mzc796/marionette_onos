@@ -64,7 +64,7 @@ NOTE: After installation and rebooting the VM, please DO NOT select `Install Now
     On the UI, click Menu->Network->Hosts, we will find h1 and h2.
 18. Host Discovery on UIs
     
-    On Topology GUI, hit the 'H' key on the keyboard, and the hosts will show up. For details, see https://pica8-fs.atlassian.net/wiki/spaces/PicOS433sp/pages/4063290/ovs-ofctl+add-flow+bridge+flow](https://wiki.onosproject.org/display/ONOS/Basic+ONOS+Tutorial#:~:text=To%20toggle%20between%20showing%20and,which%20they%20are%20the%20master.
+    On Topology GUI, hit the 'H' key on the keyboard, and the hosts will show up. For details, see https://wiki.onosproject.org/display/ONOS/Basic+ONOS+Tutorial#:~:text=To%20toggle%20between%20showing%20and,which%20they%20are%20the%20master.
     NOTE: Now we can see the shortest path from h1 to h2 is ```h1->sw1->sw4->sw5->h2``` as shown on the Topology GUI.
 20. Check Flow Entries and Shortest Path Routing
     
