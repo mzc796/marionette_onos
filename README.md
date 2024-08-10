@@ -19,7 +19,7 @@ NOTE: After installation and rebooting the VM, please DO NOT select `Install Now
 ## Build and Run an ONOS Cluster with Mininet:
 1. Download the ```marionette_onos.zip``` and extract it to $HOME
 
-NOTE: If you download the code from Github and the name is ```marionette_onos-master.zip```, please change the folder name to ```marionette_onos``` after extract it to $HOME.
+   NOTE: If you download the code from Github and the name is ```marionette_onos-master.zip```, please change the folder name to ```marionette_onos``` after extract it to $HOME.
 
 2. Change the privilege
    ```
@@ -72,7 +72,7 @@ NOTE: If you download the code from Github and the name is ```marionette_onos-ma
     NOTE: Now we can see the shortest path from h1 to h2 is ```h1->sw1->sw4->sw5->h2``` as shown on the Topology GUI.
 14. Check Flow Entries and Shortest Path Routing
     
-    On the UI, click Menu->Network->Devices. Choose of:0000000000000001 (sw1). On the top right, click `show flow view for selected device`, we can see that sw1 has been configured two flow entries by ```Application: fwd```      to forward the packets of h1 ping h2. Similarly, we will find that sw4 and sw5 are also configured with flow entries to support h1 ping h2. ```sw1->sw4->sw5``` is the shortest path as we can see from the topology.
+    On the UI, click Menu->Network->Devices. Choose ```of:0000000000000001``` (sw1). On the top right, click `show flow view for selected device`, we can see that sw1 has been configured two flow entries by ```Application: fwd```      to forward the packets of h1 ping h2. Similarly, we will find that sw4 and sw5 are also configured with flow entries to support h1 ping h2. ```sw1->sw4->sw5``` is the shortest path as we can see from the topology.
 15. Stop h1 ping h2 with ```Control+C``` on the Mininet terminal to prepare for the next step demo.
 
 ## Marionette Attack
