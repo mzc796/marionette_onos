@@ -17,7 +17,7 @@ NOTE: After installation and rebooting the VM, please DO NOT select `Install Now
 2. Mininet (any version supports OpenFlow v1.3)
 
 ## Build and Run an ONOS Cluster with Mininet:
-1. Download the ```marionette_onos.zip``` and extract it to $HOME and 
+1. Download the ```marionette_onos.zip``` and extract it to $HOME
 
 NOTE: If you download the code from Github and the name is ```marionette_onos-master.zip```, please change the folder name to ```marionette_onos``` after extract it to $HOME.
 3. Change the privilege
