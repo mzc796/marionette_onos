@@ -17,16 +17,17 @@ NOTE: After installation and rebooting the VM, please DO NOT select `Install Now
 2. Mininet (any version supports OpenFlow v1.3)
 
 ## Build and Run an ONOS Cluster with Mininet:
-1. Download the marionette_onos-master.zip
-2. Extract it to $HOME and change the privilege
+1. Download the marionette_onos.zip and extract it to $HOME and 
+NOTE: If you download the code from Github and the name is ```marionette_onos-master.zip```, please change the folder name to ```marionette_onos``` after extract it to $HOME.
+3. Change the privilege
    ```
-   cd marionette_onos-master/
+   cd marionette_onos/
    sudo chmod 774 sys_prep.sh build_atomix_dockers.sh build_onos_dockers.sh mn_run.sh restart_onos_cluster.sh
    ```
-3. Prepare the system.
+4. Prepare the system.
    
    ```sudo ./sys_prep.sh```
-4. Add and activate $USER to the docker group. $USER is the recent user of your Ubuntu system
+5. Add and activate $USER to the docker group. $USER is the recent user of your Ubuntu system
    ```
    sudo usermod -aG docker $USER
    newgrp docker
