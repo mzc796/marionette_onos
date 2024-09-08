@@ -1,3 +1,5 @@
+# Artifact on Zenodo
+https://doi.org/10.5281/zenodo.12786197
 # Part 1: Marionette on ONOS Cluster with Motivating Example Topology
 Marionette attacks the ONOS cluster from a malicious ONOS to manipulate links in Figure 1 motivating example topology with Mininet to demonstrate its capability of precise link manipulation while maintaining the same degree sequence. We also show the difference in the routings by ONOS reactive forwarding before and after the attack.
 ## Virtual Machine Platform
