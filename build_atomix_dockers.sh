@@ -9,7 +9,8 @@ docker run -t -d --name atomix-3 atomix/atomix:3.1.5
 #Generate Atomix config files
 ##path is under onos source code
 
-git clone https://gerrit.onosproject.org/onos
+#git clone https://gerrit.onosproject.org/onos
+git clone https://github.com/opennetworkinglab/onos.git
 cd onos
 
 #Set relevant env var to docker IP of Atomix instances obtained above
